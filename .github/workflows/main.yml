@@ -25,4 +25,4 @@ jobs:
       - name: Run OpenLane Synthesis and Routing
         run: |
           # Uses the runner's built-in Docker engine to execute the compiler
-          python3 -m openlane --design-dir . --pdk sky130
+          python3 -m openlane --design-dir . --pdk sky130 config.json
