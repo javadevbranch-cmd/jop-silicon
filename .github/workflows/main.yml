@@ -19,13 +19,10 @@ jobs:
 
       - name: Install OpenLane Dependencies
         run: |
-          sudo apt-get update
-          sudo apt-get install -y docker.io
           python -m pip install --upgrade pip
           pip install openlane
 
       - name: Run OpenLane Synthesis and Routing
         run: |
-          # This command initiates the silicon compilation flow
-          # It processes your design and generates the final GDSII file
+          # Uses the runner's built-in Docker engine to execute the compiler
           python3 -m openlane --design . --pdk sky130_fd_sc_hd
