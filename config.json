@@ -1,6 +1,6 @@
 {
-    "DESIGN_NAME": "jopcore",
-    "VERILOG_FILES": ["dir::jopcore.v"],
+    "DESIGN_NAME": "core",
+    "VHDL_FILES": ["dir::vhdl/core/core.vhdl"],
     "CLOCK_PORT": "clk",
     "CLOCK_PERIOD": 20.0,
     "FP_SIZING": "absolute",
