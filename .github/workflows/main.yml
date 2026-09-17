@@ -1,0 +1,31 @@
+name: Generate JOP Java Silicon GDSII
+on:
+  push:
+    branches: [ "master", "main" ]
+  pull_request:
+    branches: [ "master", "main" ]
+
+jobs:
+  openlane_harden:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+
+      - name: Install OpenLane Dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y docker.io
+          python -m pip install --upgrade pip
+          pip install openlane
+
+      - name: Run OpenLane Synthesis and Routing
+        run: |
+          # This command initiates the silicon compilation flow
+          # It processes your design and generates the final GDSII file
+          python3 -m openlane --design . --pdk sky130_fd_sc_hd
