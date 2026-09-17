@@ -17,6 +17,17 @@ jobs:
         with:
           python-version: '3.10'
 
+      - name: Install GHDL and Yosys (VHDL Compiler Tools)
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y ghdl yosys
+
+      - name: Convert JOP VHDL to Verilog
+        run: |
+          # This compiles your core.vhdl into core.v so OpenLane can read it
+          ghdl -a vhdl/core/core.vhdl
+          yosys -p "ghdl core; write_verilog core.v"
+
       - name: Install OpenLane Dependencies
         run: |
           python -m pip install --upgrade pip
@@ -24,5 +35,4 @@ jobs:
 
       - name: Run OpenLane Synthesis and Routing
         run: |
-          # Uses the runner's built-in Docker engine to execute the compiler
           python3 -m openlane --design-dir . --pdk sky130 config.json
